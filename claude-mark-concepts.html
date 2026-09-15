@@ -1,0 +1,153 @@
+<meta charset="utf-8">
+<title>Mark Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Caveat:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#150A2E; --void-2:#0E0620;
+    --bone:#F5F3F9; --bone-2:#EDE9F5;
+    --ink:#1A1030; --ink-soft:#5B5170;
+    --violet:#6B2BF5; --violet-lite:#C6ADFF;
+    --card:#FFFFFF; --border:#E4DEF2;
+    --pick-bg:#F1E9FF; --pick-border:#6B2BF5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bone:#150A2E; --bone-2:#1C1140; --ink:#F5F3F9; --ink-soft:#B3A7CC;
+      --card:#1C1140; --border:#332259; --pick-bg:#2A1858;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bone:#150A2E; --bone-2:#1C1140; --ink:#F5F3F9; --ink-soft:#B3A7CC;
+    --card:#1C1140; --border:#332259; --pick-bg:#2A1858;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bone);color:var(--ink);font-family:'Manrope',sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:64px 32px 100px;}
+  header{margin-bottom:52px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin:0 0 14px;}
+  h1{font-family:'Big Shoulders Display',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(32px,4.5vw,48px);line-height:1.02;margin:0 0 16px;max-width:16ch;}
+  header p{color:var(--ink-soft);font-size:16.5px;line-height:1.6;max-width:56ch;margin:0;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;}
+  .card.pick{border-color:var(--pick-border);background:var(--pick-bg);}
+  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--violet);padding:5px 11px;border-radius:999px;margin-bottom:16px;}
+
+  .tile{width:100%;aspect-ratio:1;border-radius:22%;overflow:hidden;position:relative;}
+  .tile svg{width:100%;height:100%;display:block;}
+
+  h3{font-family:'Big Shoulders Display',sans-serif;font-weight:700;text-transform:uppercase;font-size:18px;letter-spacing:.01em;margin:18px 0 6px;}
+  .card p{font-size:14px;line-height:1.55;color:var(--ink-soft);margin:0 0 18px;}
+
+  .swatches{display:flex;gap:6px;margin:0 0 16px;}
+  .sw{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.08);}
+
+  .scale-row{display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid var(--border);}
+  .scale-row .tile{border-radius:26%;}
+  .s64{width:52px;}
+  .s32{width:32px;}
+  .s20{width:20px;}
+  .scale-row .circle{border-radius:50%;}
+  .scale-label{font-size:10px;color:var(--ink-soft);text-align:center;margin-top:6px;letter-spacing:.03em;}
+  .scale-item{display:flex;flex-direction:column;align-items:center;}
+
+  .verdict{margin-top:56px;background:var(--void);color:var(--bone);border-radius:22px;padding:36px 40px;}
+  :root[data-theme="dark"] .verdict, :root:not([data-theme="light"]) .verdict{background:var(--violet);}
+  @media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .verdict{background:var(--void);color:#F5F3F9;}}
+  .verdict .eyebrow{color:var(--violet-lite);}
+  .verdict h2{font-family:'Big Shoulders Display',sans-serif;text-transform:uppercase;font-weight:800;font-size:26px;margin:0 0 12px;}
+  .verdict p{color:rgba(245,243,249,.82);font-size:15.5px;line-height:1.65;max-width:64ch;margin:0;}
+  .verdict p+p{margin-top:12px;}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Shaped by Code — Mark C, recolored</p>
+    <h1>Same mark. Five color reads.</h1>
+    <p>You picked C — the wordmark S with the script "by" tucked into it. Same exact composition below, five different color treatments, each shown full size and scaled to 52 / 32 / 20px so you can judge it the way an avatar actually gets seen.</p>
+  </header>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="swatches"><span class="sw" style="background:#150A2E"></span><span class="sw" style="background:#F5F3F9"></span><span class="sw" style="background:#C6ADFF"></span></div>
+      <div class="tile" style="background:#150A2E">
+        <svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg>
+      </div>
+      <h3>C1 — Original</h3>
+      <p>Ultraviolet black, bone S, soft violet script. Quiet and legible — the safe baseline.</p>
+      <div class="scale-row">
+        <div class="scale-item"><div class="tile s64" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">52px</span></div>
+        <div class="scale-item"><div class="tile circle s32" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">32px</span></div>
+        <div class="scale-item"><div class="tile circle s20" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">20px</span></div>
+      </div>
+    </div>
+
+    <div class="card pick">
+      <span class="tag">Recommended</span>
+      <div class="swatches"><span class="sw" style="background:#6B2BF5"></span><span class="sw" style="background:#F5F3F9"></span><span class="sw" style="background:#150A2E"></span></div>
+      <div class="tile" style="background:#6B2BF5">
+        <svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#150A2E">by</text></svg>
+      </div>
+      <h3>C2 — Violet field</h3>
+      <p>Full violet ground, bone S, ink script. The most "app icon" of the set — sits on any platform's chrome without disappearing, and the ink "by" stays sharp at every size.</p>
+      <div class="scale-row">
+        <div class="scale-item"><div class="tile s64" style="background:#6B2BF5"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#150A2E">by</text></svg></div><span class="scale-label">52px</span></div>
+        <div class="scale-item"><div class="tile circle s32" style="background:#6B2BF5"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#150A2E">by</text></svg></div><span class="scale-label">32px</span></div>
+        <div class="scale-item"><div class="tile circle s20" style="background:#6B2BF5"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#150A2E">by</text></svg></div><span class="scale-label">20px</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="swatches"><span class="sw" style="background:#F5F3F9"></span><span class="sw" style="background:#150A2E"></span><span class="sw" style="background:#6B2BF5"></span></div>
+      <div class="tile" style="background:#F5F3F9;box-shadow:inset 0 0 0 1px #E4DEF2">
+        <svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#150A2E">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#6B2BF5">by</text></svg>
+      </div>
+      <h3>C3 — Bone / light</h3>
+      <p>Ink S on bone, violet script. The light-mode version — better on platforms with white chrome, or next to the light sections of the site.</p>
+      <div class="scale-row">
+        <div class="scale-item"><div class="tile s64" style="background:#F5F3F9;box-shadow:inset 0 0 0 1px #E4DEF2"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#150A2E">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#6B2BF5">by</text></svg></div><span class="scale-label">52px</span></div>
+        <div class="scale-item"><div class="tile circle s32" style="background:#F5F3F9;box-shadow:inset 0 0 0 1px #E4DEF2"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#150A2E">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#6B2BF5">by</text></svg></div><span class="scale-label">32px</span></div>
+        <div class="scale-item"><div class="tile circle s20" style="background:#F5F3F9;box-shadow:inset 0 0 0 1px #E4DEF2"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#150A2E">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#6B2BF5">by</text></svg></div><span class="scale-label">20px</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="swatches"><span class="sw" style="background:#150A2E"></span><span class="sw" style="background:#6B2BF5"></span><span class="sw" style="background:#C6ADFF"></span></div>
+      <div class="tile" style="background:#150A2E">
+        <svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#6B2BF5">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg>
+      </div>
+      <h3>C4 — Tonal violet</h3>
+      <p>No white at all — violet S, lighter violet script, both on black. Moodier, more "cinematic hero" than "app icon." Loses a little contrast at 20px.</p>
+      <div class="scale-row">
+        <div class="scale-item"><div class="tile s64" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#6B2BF5">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">52px</span></div>
+        <div class="scale-item"><div class="tile circle s32" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#6B2BF5">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">32px</span></div>
+        <div class="scale-item"><div class="tile circle s20" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#6B2BF5">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C6ADFF">by</text></svg></div><span class="scale-label">20px</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="swatches"><span class="sw" style="background:#150A2E"></span><span class="sw" style="background:#F5F3F9"></span><span class="sw" style="background:#C9F73D"></span></div>
+      <div class="tile" style="background:#150A2E">
+        <svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C9F73D">by</text></svg>
+      </div>
+      <h3>C5 — Citron spark</h3>
+      <p>Bone S, the script "by" in citron instead of violet. Not part of the live site's palette right now, but it's the punchiest of the five if you want the avatar to pop harder than the site itself.</p>
+      <div class="scale-row">
+        <div class="scale-item"><div class="tile s64" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C9F73D">by</text></svg></div><span class="scale-label">52px</span></div>
+        <div class="scale-item"><div class="tile circle s32" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C9F73D">by</text></svg></div><span class="scale-label">32px</span></div>
+        <div class="scale-item"><div class="tile circle s20" style="background:#150A2E"><svg viewBox="0 0 240 240"><text x="112" y="172" font-family="'Big Shoulders Display'" font-weight="800" font-size="195" text-anchor="middle" fill="#F5F3F9">S</text><text x="176" y="196" font-family="'Caveat'" font-weight="700" font-size="58" text-anchor="middle" fill="#C9F73D">by</text></svg></div><span class="scale-label">20px</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="verdict">
+    <p class="eyebrow">My pick</p>
+    <h2>C2 — violet field, bone S, ink script.</h2>
+    <p>Flipping the ground to full violet instead of near-black is what actually improves this over the original — violet is your one truly ownable color, so leading with it (rather than treating it as a small accent inside a black tile) makes the avatar unmistakably yours from across a page of other icons.</p>
+    <p>It also holds contrast best at 20px: bone-on-violet and ink-on-violet both stay crisp, where black-background versions start to feel like they're competing with a phone's own dark-mode chrome.</p>
+  </div>
+</div>

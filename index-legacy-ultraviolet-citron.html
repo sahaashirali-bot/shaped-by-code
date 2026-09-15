@@ -1,0 +1,532 @@
+<title>Shaped by Code</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Caveat:wght@700&family=Manrope:wght@400;500;600;700&display=swap');
+
+  :root{
+    /* ultraviolet ground, citron signal */
+    --void:#150A2E; --void-2:#0E0620; --void-3:#241046;
+    --bone:#F5F3F9; --bone-2:#EBE6F4;
+    --ink:#1A1030; --ink-soft:#584C74;
+    --violet:#6B2BF5; --violet-deep:#4A17B8;
+    --citron:#C9F73D; --citron-lite:#DEFF66;
+    --hair:rgba(26,16,48,.16); --hair-light:rgba(245,243,249,.2);
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0; background:var(--bone); width:100%; overflow-x:hidden; overscroll-behavior-x:none;}
+  body{
+    color:var(--ink); font-family:'Manrope',system-ui,sans-serif;
+    font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased; caret-color:var(--violet);
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  ::selection{background:var(--citron); color:#141024;}
+  ::-webkit-scrollbar{width:11px;}
+  ::-webkit-scrollbar-track{background:var(--bone-2);}
+  ::-webkit-scrollbar-thumb{background:#BFB3D9; border-radius:6px; border:3px solid var(--bone-2);}
+  ::-webkit-scrollbar-thumb:hover{background:var(--violet);}
+  :focus-visible{outline:2px solid var(--violet); outline-offset:3px;}
+
+  .wrap{max-width:1240px; margin:0 auto; padding:0 46px;}
+  h1,h2,h3{font-family:'Big Shoulders Display',sans-serif; text-transform:uppercase; letter-spacing:-.018em; margin:0;}
+  h1{font-size:clamp(46px,8.4vw,112px); line-height:.92; text-wrap:balance;}
+  h2{font-size:clamp(34px,4.8vw,64px); line-height:.95; text-wrap:balance;}
+  h3{font-size:clamp(24px,2.2vw,31px); line-height:1.04;}
+  p{margin:0;}
+
+  .w{display:inline-block; overflow:hidden; vertical-align:top;}
+  .w > i{display:inline-block; font-style:inherit; will-change:transform;}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:sticky; top:0; height:100vh; height:100svh; min-height:600px; max-height:960px;
+    overflow:hidden; background:var(--void-2); display:flex; flex-direction:column; z-index:0;
+  }
+  .hero-shot{position:absolute; inset:0; overflow:hidden;}
+  .hero-shot img{width:100%; height:100%; object-fit:cover; transform:scale(1.14);
+    filter:saturate(1.34) contrast(1.08); will-change:transform;}
+  /* ultraviolet veil, kept thin through the middle so the city's gold
+     still burns through it — gold sits opposite violet on the wheel */
+  .hero-veil{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 46%, rgba(58,20,124,.20), rgba(14,6,32,.80) 74%),
+      linear-gradient(to bottom, rgba(14,6,32,.88) 0%, rgba(52,20,112,.16) 40%, rgba(14,6,32,.95) 100%);
+  }
+  .hero-dim{position:absolute; inset:0; background:var(--void-2); opacity:0; pointer-events:none;}
+
+  nav{
+    position:relative; z-index:6; display:flex; align-items:center; justify-content:space-between;
+    gap:22px; padding:24px 46px; max-width:1240px; margin:0 auto; width:100%; color:#F5F3F9;
+  }
+  .logo{font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:24px; letter-spacing:.04em; text-transform:uppercase;}
+  .logo i{font-family:'Caveat',cursive; font-style:normal; text-transform:none; letter-spacing:0; color:var(--citron); font-size:25px;}
+  nav .links{display:flex; gap:30px; font-size:13px; letter-spacing:.13em; text-transform:uppercase; color:rgba(245,243,249,.66);}
+  nav .links a{position:relative; padding-bottom:3px;}
+  nav .links a::after{content:''; position:absolute; left:0; bottom:0; width:100%; height:1px; background:var(--citron); transform:scaleX(0); transform-origin:right; transition:transform .45s var(--ease);}
+  nav .links a:hover{color:#fff;} nav .links a:hover::after{transform:scaleX(1); transform-origin:left;}
+  .navcta{border:1px solid var(--hair-light); padding:11px 21px; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:#F5F3F9; transition:background .45s var(--ease), color .45s var(--ease), border-color .45s var(--ease);}
+  .navcta:hover{background:var(--citron); border-color:var(--citron); color:#141024;}
+
+  .hero-body{position:relative; z-index:5; margin:auto; width:100%; padding:20px 46px; text-align:center; color:#F5F3F9;}
+  .hero-body h1{margin:0 auto 40px; max-width:15ch;}
+  .hero-body h1 em{font-style:normal; color:var(--citron);}
+  .hero-acts{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+
+  .btn{display:inline-block; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:19px; letter-spacing:.09em; text-transform:uppercase; padding:16px 36px; transition:transform .5s var(--ease), background .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease);}
+  .btn-go{background:var(--citron); color:#141024;}
+  .btn-go:hover{background:var(--citron-lite); transform:translateY(-2px);}
+  .btn-line{border:1px solid var(--hair-light); color:#F5F3F9;}
+  .btn-line:hover{border-color:#F5F3F9; transform:translateY(-2px);}
+
+  .hero-foot{
+    position:relative; z-index:5; display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+    max-width:1240px; margin:0 auto; width:100%; padding:0 46px 30px;
+    font-size:13px; letter-spacing:.01em; color:rgba(245,243,249,.6);
+  }
+  .hero-foot b{color:var(--citron); font-weight:600;}
+
+  .after{position:relative; z-index:2; background:var(--bone);}
+
+  /* ================= STATEMENT ================= */
+  /* the one full-volume moment: citron slab, violet emphasis */
+  .descent{
+    background:var(--citron); color:var(--ink);
+    padding:118px 0 108px; box-shadow:0 -40px 80px -34px rgba(14,6,32,.6);
+  }
+  .descent h2{max-width:16ch;}
+  .descent h2 em{font-style:normal; color:var(--violet-deep);}
+  .descent p{color:#2E2448; max-width:46ch; margin-top:24px; font-size:19px;}
+
+  /* ================= PHONE + FEATURES ================= */
+  .device{padding:108px 0 120px;}
+  .device-grid{display:grid; grid-template-columns:1.02fr 1fr; gap:76px; align-items:center;}
+
+  /* desktop browser with a phone beside it — the same site on both */
+  .rig{position:relative; width:100%; max-width:520px; margin:0 auto; padding-bottom:54px;}
+  .desktop{
+    border-radius:12px; overflow:hidden; background:#fff;
+    box-shadow:0 40px 74px -36px rgba(14,6,32,.55), 0 0 0 1px rgba(26,16,48,.12);
+  }
+  .chrome{
+    display:flex; align-items:center; gap:7px; padding:11px 14px; background:#E4E0EE;
+    border-bottom:1px solid rgba(26,16,48,.12);
+  }
+  .dot{width:9px; height:9px; border-radius:50%; background:#BDB4D4;}
+  .url{
+    flex:1; margin-left:8px; height:23px; border-radius:5px; background:#F5F3F9;
+    display:flex; align-items:center; padding:0 10px; font-size:11.5px; color:var(--ink-soft);
+  }
+  .scr-top{
+    height:150px; background:var(--void-3); position:relative; overflow:hidden;
+    display:flex; align-items:flex-end; padding:20px;
+  }
+  .scr-top::after{content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 62% 130%, rgba(139,92,255,.5), transparent 62%);}
+  .scr-title{
+    position:relative; z-index:2; font-family:'Big Shoulders Display',sans-serif; font-weight:700;
+    text-transform:uppercase; color:#F5F3F9; font-size:26px; line-height:.94;
+  }
+  .scr-body{padding:20px; display:flex; flex-direction:column; gap:10px; background:var(--bone);}
+  .bar{height:9px; border-radius:5px; background:#D8D2E8;}
+  .bar.s{width:48%;} .bar.m{width:74%;} .bar.l{width:92%;}
+  .scr-cta{margin-top:6px; width:132px; height:32px; border-radius:7px; background:var(--violet);}
+  .scr-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px;}
+  .scr-cards div{height:56px; border-radius:8px; background:#E2DDEE;}
+
+  /* the small phone showing the same page */
+  .mini{
+    position:absolute; right:-14px; bottom:0; width:118px; aspect-ratio:118/232;
+    border-radius:19px; background:linear-gradient(160deg,#2A1550,#160A32); padding:6px;
+    box-shadow:0 26px 44px -22px rgba(14,6,32,.6);
+  }
+  .mini-scr{width:100%; height:100%; border-radius:14px; overflow:hidden; background:var(--bone); display:flex; flex-direction:column;}
+  .mini-top{height:56px; background:var(--void-3); position:relative; overflow:hidden; flex-shrink:0;}
+  .mini-top::after{content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 60% 130%, rgba(139,92,255,.5), transparent 62%);}
+  .mini-body{padding:9px; display:flex; flex-direction:column; gap:5px;}
+  .mini-body i{display:block; height:5px; border-radius:3px; background:#D8D2E8;}
+  .mini-body i.a{width:88%;} .mini-body i.b{width:64%;}
+  .mini-body .mcta{height:15px; border-radius:4px; background:var(--violet); margin-top:3px;}
+
+  /* live status chip */
+  .ring{
+    position:absolute; left:-10px; bottom:34px;
+    display:flex; align-items:center; gap:9px; background:var(--void); color:#F5F3F9;
+    padding:10px 16px; border-radius:999px; font-size:12.5px; white-space:nowrap;
+    box-shadow:0 12px 26px -14px rgba(14,6,32,.8); z-index:4;
+  }
+  .ring b{width:7px; height:7px; border-radius:50%; background:#C9F73D; flex-shrink:0;}
+
+  .feats{display:grid; gap:0;}
+  .feat{display:flex; gap:22px; padding:30px 0; border-bottom:1px solid var(--hair); align-items:flex-start;}
+  .feat:last-child{border-bottom:none;}
+  .feat-ic{
+    width:50px; height:50px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(107,43,245,.10);
+  }
+  .feat h3{margin-bottom:8px;}
+  .feat p{color:var(--ink-soft); font-size:16.5px; line-height:1.58; max-width:40ch;}
+
+  /* ================= ALTERNATING ROWS ================= */
+  .rows{background:var(--void); color:#F5F3F9; padding:118px 0 124px; position:relative; overflow:hidden;}
+  .rows::before{content:''; position:absolute; left:50%; top:-200px; width:800px; height:560px; transform:translateX(-50%); background:radial-gradient(ellipse, rgba(139,92,255,.14), transparent 70%); pointer-events:none;}
+  .rows > .wrap{position:relative;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .row + .row{margin-top:130px;}
+  .row .shot{position:relative;}
+  .row .shot img{width:100%; height:560px; object-fit:cover; border-radius:4px;}
+  .row .copy h2{color:#F5F3F9; margin-bottom:20px;}
+  .row .copy > p{color:rgba(245,243,249,.76); font-size:18px; max-width:42ch;}
+  .row ul{list-style:none; padding:0; margin:26px 0 0;}
+  .row li{position:relative; padding:12px 0 12px 28px; font-size:16.5px; color:rgba(245,243,249,.9); border-top:1px solid var(--hair-light);}
+  .row li::before{content:''; position:absolute; left:2px; top:20px; width:8px; height:8px; border-right:1.5px solid var(--citron); border-bottom:1.5px solid var(--citron); transform:rotate(-45deg);}
+  /* the diagonal stagger */
+  .row-a .shot{order:2; transform:translateY(-42px);}
+  .row-a .copy{order:1;}
+  .row-b .shot{order:1; transform:translateY(46px);}
+  .row-b .copy{order:2;}
+  .tagmark{
+    position:absolute; background:var(--citron); color:#141024; font-family:'Big Shoulders Display',sans-serif;
+    font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:16px; padding:12px 20px;
+  }
+  .row-a .tagmark{left:-18px; bottom:32px;}
+  .row-b .tagmark{right:-18px; top:32px; background:var(--violet); color:#fff;}
+
+  /* ================= PROCESS ================= */
+  .process{padding:114px 0 118px;}
+  .process h2{max-width:12ch; margin-bottom:56px;}
+  .track{position:relative; padding-left:56px;}
+  .track-line{position:absolute; left:11px; top:8px; bottom:8px; width:2px; background:var(--hair);}
+  .track-line span{position:absolute; inset:0; background:var(--violet); transform-origin:top; transform:scaleY(0); will-change:transform;}
+  .stepp{position:relative; padding:0 0 44px;}
+  .stepp:last-child{padding-bottom:0;}
+  .stepp::before{content:''; position:absolute; left:-51px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--bone); border:2px solid var(--hair);}
+  .stepp.lit::before{border-color:var(--violet); background:var(--violet);}
+  .stepp h3{margin-bottom:6px;}
+  .stepp p{color:var(--ink-soft); max-width:46ch; font-size:17px;}
+
+  /* ================= ABOUT ================= */
+  .about{background:var(--bone-2); padding:112px 0 116px; border-top:1px solid var(--hair);}
+  .about-grid{display:grid; grid-template-columns:1fr .85fr; gap:80px; align-items:center;}
+  .about h2{max-width:13ch;}
+  .about h2 em{font-style:normal; color:var(--violet);}
+  .about p{color:var(--ink-soft); max-width:44ch; font-size:18px;}
+  .about p + p{margin-top:20px;}
+  .about img{width:100%; height:420px; object-fit:cover; border-radius:4px;}
+
+  /* ================= CONTACT ================= */
+  .contact{background:var(--violet-deep); color:#F5F3F9; padding:126px 0 122px; text-align:center; position:relative; overflow:hidden;}
+  .contact::before{content:''; position:absolute; left:50%; top:50%; width:900px; height:900px; transform:translate(-50%,-50%); background:radial-gradient(circle, rgba(201,247,61,.13), transparent 62%); pointer-events:none;}
+  .contact-in{position:relative;}
+  .contact h2{color:#F5F3F9; max-width:15ch; margin:0 auto 24px;}
+  .contact p{color:rgba(245,243,249,.88); max-width:40ch; margin:0 auto 36px; font-size:18.5px;}
+  .contact .fine{font-size:14.5px; color:rgba(245,243,249,.66); margin-top:26px;}
+
+  footer{background:var(--void-3); color:rgba(245,243,249,.6); padding:36px 0; font-size:15px;}
+  .foot{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;}
+  .foot .logo{color:#F5F3F9; font-size:20px;}
+  footer a:hover{color:var(--citron);}
+
+  @media (max-width:960px){
+    .device-grid,.about-grid{grid-template-columns:1fr; gap:48px;}
+    .row,.row+.row{grid-template-columns:1fr; gap:32px;}
+    .row+.row{margin-top:74px;}
+    .row-a .shot,.row-b .shot{order:1; transform:none;}
+    .row-a .copy,.row-b .copy{order:2;}
+    .row .shot img{height:400px;}
+    .row-a .tagmark{left:14px; bottom:14px;} .row-b .tagmark{right:14px; top:14px;}
+  }
+  @media (max-width:680px){
+    body{font-size:17px;}
+    .wrap{padding:0 22px;}
+    nav{padding:18px 22px;} nav .links{display:none;}
+    .hero{height:100svh; min-height:520px; max-height:none;}
+    .hero-body{padding:20px 22px;}
+    .hero-body h1{max-width:12ch; margin-bottom:34px;}
+    .hero-foot{padding:0 22px 22px; font-size:12px; gap:4px 14px; justify-content:flex-start;}
+    .descent{padding:76px 0 58px;}
+    .device{padding-bottom:76px;}
+    .rows{padding:78px 0 84px;}
+    .process,.about{padding:78px 0 82px;}
+    .contact{padding:88px 0 86px;}
+    .track{padding-left:38px;} .track-line{left:5px;} .stepp::before{left:-37px;}
+    .about img{height:300px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .hero-shot img{transform:none !important;}
+    .w > i{transform:none !important;}
+    .track-line span{transform:scaleY(1) !important;}
+    *{animation-duration:.01ms !important; transition-duration:.12s !important;}
+  }
+</style>
+
+<!-- =========================== HERO =========================== -->
+<header class="hero" id="top">
+  <div class="hero-shot"><img src="hero.jpg" alt="A city's street grid glowing gold, seen from high above at night"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-dim"></div>
+
+  <nav>
+    <div class="logo">Shaped <i>by</i> Code</div>
+    <div class="links">
+      <a href="#what">What You Get</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a>
+    </div>
+    <a class="navcta" href="#contact">Free Quote</a>
+  </nav>
+
+  <div class="hero-body">
+    <h1 data-reveal>Your business deserves a website that <em>actually brings work in.</em></h1>
+    <div class="hero-acts">
+      <a class="btn btn-go" href="#contact">Book a Free Call</a>
+      <a class="btn btn-line" href="#what">What&rsquo;s Included</a>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <span><b>15+</b> years coding &nbsp;&middot;&nbsp; <b>Real</b> client work</span>
+    <span><b>24/7</b> call coverage &nbsp;&middot;&nbsp; <b>Original</b> design, every time</span>
+  </div>
+</header>
+
+<main class="after">
+
+  <!-- ====================== STATEMENT ====================== -->
+  <section class="descent">
+    <div class="wrap">
+      <h2 data-reveal>Somebody out there is looking for you <em>right now.</em></h2>
+      <p>They&rsquo;ll find somebody. My job is making sure it&rsquo;s you &mdash; and that the phone gets picked up.</p>
+    </div>
+  </section>
+
+  <!-- ====================== PHONE + FEATURES ====================== -->
+  <section class="device" id="what">
+    <div class="wrap device-grid">
+      <div class="rig">
+        <div class="desktop">
+          <div class="chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="url">yourbusiness.com</span>
+          </div>
+          <div class="scr-top"><div class="scr-title">Your business,<br>built properly</div></div>
+          <div class="scr-body">
+            <div class="bar l"></div><div class="bar m"></div><div class="bar s"></div>
+            <div class="scr-cta"></div>
+            <div class="scr-cards"><div></div><div></div><div></div></div>
+          </div>
+        </div>
+
+        <div class="mini" aria-hidden="true">
+          <div class="mini-scr">
+            <div class="mini-top"></div>
+            <div class="mini-body">
+              <i class="a"></i><i class="b"></i><i class="a"></i>
+              <div class="mcta"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ring"><b></b> Live &mdash; loads in 1.4s</div>
+      </div>
+
+      <div class="feats">
+        <div class="feat">
+          <div class="feat-ic">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B2BF5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
+          </div>
+          <div>
+            <h3>Built for the phone first</h3>
+            <p>That&rsquo;s where your customers are. It loads fast and nothing runs off the screen.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-ic">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B2BF5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+          </div>
+          <div>
+            <h3>Found on Google</h3>
+            <p>Built around what people in your area actually search for.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-ic">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B2BF5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l8 4.2-8 4.2-8-4.2 8-4.2z"/><path d="M6 10.4v4.3c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.3"/><path d="M20.5 8.4v5"/></svg>
+          </div>
+          <div>
+            <h3>Yours to run</h3>
+            <p>I show you how to change your own text and photos. No waiting on me.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== ALTERNATING ROWS ====================== -->
+  <section class="rows" id="services">
+    <div class="wrap">
+
+      <div class="row row-a">
+        <div class="copy">
+          <h2 data-reveal>Websites that bring in work.</h2>
+          <p>Not a brochure. A site built to turn the people who find you into people who call you.</p>
+          <ul>
+            <li>Designed from scratch for your business</li>
+            <li>Loads in about two seconds</li>
+            <li>Ranks for searches in your area</li>
+          </ul>
+        </div>
+        <div class="shot">
+          <img src="work-1.jpg" alt="A developer building a website, code beside the live page">
+          <span class="tagmark">Built by hand</span>
+        </div>
+      </div>
+
+      <div class="row row-b">
+        <div class="shot">
+          <img src="work-2.jpg" alt="A headset beside a laptop, ready to take calls">
+          <span class="tagmark">Always answered</span>
+        </div>
+        <div class="copy">
+          <h2 data-reveal>A front desk that never closes.</h2>
+          <p>Missed calls are missed money. Yours get answered while you&rsquo;re on the job.</p>
+          <ul>
+            <li>Answers day, night and weekends</li>
+            <li>Handles hours, pricing and availability</li>
+            <li>Books straight into your calendar</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================== PROCESS ====================== -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <h2 data-reveal>Four steps, and you&rsquo;re live.</h2>
+      <div class="track">
+        <div class="track-line"><span></span></div>
+        <div class="stepp"><h3>We talk</h3><p>A free call. I learn what you do and what isn&rsquo;t working.</p></div>
+        <div class="stepp"><h3>I design</h3><p>You see it before anything gets built.</p></div>
+        <div class="stepp"><h3>You review</h3><p>Tell me what to change. I change it until it&rsquo;s right.</p></div>
+        <div class="stepp"><h3>You launch</h3><p>Site goes live, answering switches on, and I&rsquo;m still here after.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== ABOUT ====================== -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <h2 data-reveal>Fifteen years of code, and an <em>original design</em> every time.</h2>
+        <p>No account managers, no ticket queue. You talk to the person doing the work.</p>
+        <p>Every design is drawn up fresh for the business it belongs to.</p>
+      </div>
+      <img src="work-3.jpg" alt="Two screens showing website layouts in progress">
+    </div>
+  </section>
+
+  <!-- ====================== CONTACT ====================== -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-in">
+      <h2 data-reveal>Let&rsquo;s talk about your business.</h2>
+      <p>Tell me what you do. I&rsquo;ll tell you straight whether I can help.</p>
+      <a class="btn btn-go" href="mailto:hello@shapedbycode.com">Book a Free Call</a>
+      <p class="fine">No charge, no pressure.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <div class="logo">Shaped <i>by</i> Code</div>
+      <div>Web design &amp; automated reception &middot; Texas</div>
+      <div><a href="mailto:hello@shapedbycode.com">hello@shapedbycode.com</a></div>
+    </div>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !(window.gsap && window.ScrollTrigger)) return;
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize:true });
+
+  if (window.Lenis) {
+    var lenis = new Lenis({ lerp:.085, smoothWheel:true, syncTouch:false });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* FOCAL: descend into the grid */
+  var mm = gsap.matchMedia();
+  mm.add({ big:'(min-width: 861px)', small:'(max-width: 860px)' }, function(ctx){
+    var big = ctx.conditions.big;
+    gsap.to('.hero-shot img', { scale: big?1.3:1.2, ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub: big?1:.8 } });
+    gsap.to('.hero-dim', { opacity:.7, ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub: big?1:.8 } });
+    gsap.to('.hero-body, .hero-foot', { y: big?-50:-30, opacity:0, ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'10% top', end:'68% top', scrub: big?.9:.7 } });
+
+    /* photos drift against their copy — only where there's room for it */
+    if (big) {
+      gsap.utils.toArray('.row .shot img').forEach(function(img){
+        gsap.fromTo(img, { yPercent:-4 }, { yPercent:4, ease:'none',
+          scrollTrigger:{ trigger:img.closest('.row'), start:'top bottom', end:'bottom top', scrub:1 } });
+      });
+    }
+  });
+
+  /* headline word reveals */
+  document.querySelectorAll('[data-reveal]').forEach(function(el){
+    var tmp = document.createElement('div'); tmp.innerHTML = el.innerHTML;
+    (function walk(n){
+      Array.prototype.slice.call(n.childNodes).forEach(function(c){
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function(p){
+            if (!p.trim()) { frag.appendChild(document.createTextNode(p)); return; }
+            var w = document.createElement('span'); w.className='w';
+            var i = document.createElement('i'); i.textContent = p;
+            w.appendChild(i); frag.appendChild(w);
+          });
+          c.parentNode.replaceChild(frag, c);
+        } else if (c.nodeType === 1) walk(c);
+      });
+    })(tmp);
+    el.innerHTML = tmp.innerHTML;
+    var inners = el.querySelectorAll('.w > i');
+    gsap.set(inners, { yPercent:108 });
+    gsap.to(inners, { yPercent:0, duration:.78, ease:'expo.out', stagger:.035,
+      scrollTrigger:{ trigger:el, start:'top 88%', once:true } });
+  });
+
+  /* process line draws through the steps */
+  gsap.to('.track-line span', { scaleY:1, ease:'none',
+    scrollTrigger:{ trigger:'.track', start:'top 72%', end:'bottom 78%', scrub:.4 } });
+  document.querySelectorAll('.stepp').forEach(function(s){
+    ScrollTrigger.create({ trigger:s, start:'top 76%',
+      onEnter:function(){ s.classList.add('lit'); },
+      onLeaveBack:function(){ s.classList.remove('lit'); } });
+  });
+
+  /* the phone and its three features arrive together */
+  gsap.from('.rig', { y:34, opacity:0, duration:.85, ease:'expo.out',
+    scrollTrigger:{ trigger:'.device-grid', start:'top 78%', once:true } });
+  gsap.from('.feat', { y:22, opacity:0, duration:.7, ease:'expo.out', stagger:.1,
+    scrollTrigger:{ trigger:'.device-grid', start:'top 74%', once:true } });
+  gsap.fromTo('.ring', { scale:.86, opacity:0 }, { scale:1, opacity:1, duration:.6, ease:'back.out(1.7)', delay:.5,
+    scrollTrigger:{ trigger:'.device-grid', start:'top 74%', once:true } });
+
+  ScrollTrigger.refresh();
+})();
+</script>
