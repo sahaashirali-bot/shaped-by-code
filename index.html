@@ -126,6 +126,15 @@ h1 em{font-style:normal;color:var(--green)}
 .svc.feature p{color:#C9C9C9}
 .svc.feature ul{border-top-color:#333}
 .svc.feature .price{font-family:var(--display);font-weight:800;font-size:54px;letter-spacing:-.04em;line-height:1;margin:2px 0 12px}
+/* clickable service cards */
+a.svc{color:inherit;text-decoration:none;cursor:pointer;transition:scale .25s ease,box-shadow .25s ease,outline-color .25s ease,transform .7s cubic-bezier(.2,.7,.2,1);outline:2px solid transparent;outline-offset:-2px;-webkit-tap-highlight-color:transparent}
+.svc-go{margin-top:18px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;color:var(--green-dk)}
+.svc-go i{font-style:normal;transition:translate .25s ease}
+.svc.feature .svc-go{color:#7BE3A6}
+@media (hover:hover){a.svc:hover{scale:1.03;box-shadow:0 18px 40px -18px rgba(15,122,67,.45);outline-color:var(--green)}a.svc.feature:hover{box-shadow:0 18px 40px -16px rgba(0,0,0,.55)}a.svc:hover .svc-go i{translate:4px 0}}
+a.svc:active{scale:.98}
+a.svc:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){a.svc,a.svc:hover,a.svc:active{scale:none}}
 @media (max-width:900px){.svc-grid{grid-template-columns:1fr}}
 
 /* receptionist demo */
@@ -251,7 +260,7 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
       <h2 class="reveal" data-es="Todo lo que tu negocio necesita para que lo encuentren — y lo llamen.">Everything your business needs to get found — and get called.</h2>
       <p class="lede" data-es="Empieza con un sitio web de $99 y agrega lo demás cuando lo necesites.">Start with a $99 website. Add the rest when you need it.</p>
       <div class="svc-grid">
-        <article class="svc feature reveal">
+        <a class="svc feature reveal" href="quote.html?service=website">
           <span class="tag" data-es="Sitios web">Websites</span>
           <div class="price">$99</div>
           <h3 data-es="Un sitio web que te trae trabajo.">A website that brings in work.</h3>
@@ -261,8 +270,9 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
             <li data-es="Preparado para búsquedas en Google">Set up to be found on Google</li>
             <li data-es="Botones fáciles para llamar y reservar">Easy call and booking buttons</li>
           </ul>
-        </article>
-        <article class="svc reveal">
+          <span class="svc-go" data-es="Pide tu cotización <i>→</i>">Get a quote <i>→</i></span>
+        </a>
+        <a class="svc reveal" href="quote.html?service=automation">
           <span class="tag" data-es="Recepcionista virtual">Virtual receptionist</span>
           <h3 data-es="No vuelvas a perder una llamada.">Never miss a call again.</h3>
           <p data-es="Contesta cuando estás ocupado o cerrado, responde preguntas comunes y toma los datos del cliente.">Answers when you’re busy or closed, handles common questions, and takes the caller’s details.</p>
@@ -271,8 +281,9 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
             <li data-es="Agenda citas en tu calendario">Books appointments into your calendar</li>
             <li data-es="Te envía un resumen de cada llamada">Sends you a summary of every call</li>
           </ul>
-        </article>
-        <article class="svc reveal">
+          <span class="svc-go" data-es="Pide tu cotización <i>→</i>">Get a quote <i>→</i></span>
+        </a>
+        <a class="svc reveal" href="quote.html?service=both">
           <span class="tag" data-es="Cuidado continuo">Ongoing care</span>
           <h3 data-es="Nosotros lo mantenemos funcionando.">We keep it all running.</h3>
           <p data-es="No construimos y desaparecemos. Seguimos contigo mientras tu negocio crece.">We don’t build it and disappear. We stay with you as your business grows.</p>
@@ -281,7 +292,8 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
             <li data-es="Mantenimiento del sitio web">Website maintenance</li>
             <li data-es="Soporte continuo">Ongoing support</li>
           </ul>
-        </article>
+          <span class="svc-go" data-es="Pide tu cotización <i>→</i>">Get a quote <i>→</i></span>
+        </a>
       </div>
     </div>
   </section>
