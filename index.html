@@ -61,9 +61,20 @@ section{padding-block:clamp(64px,9vw,110px)}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:var(--ink)}
 .nav-right{display:flex;align-items:center;gap:10px}
-.lang{border:1.5px solid var(--ink);background:none;border-radius:30px;padding:7px 12px;font:700 13px var(--body);cursor:pointer;color:var(--ink)}
-.lang span{opacity:.4}
-.lang span.on{opacity:1}
+.lang-wrap{position:relative}
+.lang{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--green);background:var(--mint);border-radius:30px;padding:8px 14px 8px 11px;font:700 14px var(--body);cursor:pointer;color:var(--green-dk);transition:background .2s ease,transform .15s ease}
+.lang:hover{background:#d7efe1}
+.lang:active{transform:scale(.97)}
+.lang svg{width:17px;height:17px;flex:none}
+.lang-tip{position:absolute;top:calc(100% + 14px);right:0;width:250px;background:var(--ink);color:#fff;border-radius:16px;padding:14px 38px 14px 16px;font-size:14.5px;line-height:1.4;box-shadow:0 18px 36px -14px rgba(0,0,0,.45);transition:opacity .25s ease,translate .25s ease;animation:tipIn .5s .6s both}
+.lang-tip::before{content:"";position:absolute;top:-7px;right:50px;width:16px;height:16px;background:var(--ink);transform:rotate(45deg);border-radius:3px}
+.lang-tip b{display:block;font-size:16px;margin-bottom:2px;color:#7BE3A6}
+.lang-tip button{position:absolute;top:8px;right:8px;width:28px;height:28px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font:700 16px/1 var(--body);cursor:pointer}
+.lang-tip button:hover{background:rgba(255,255,255,.22)}
+.lang-tip.away{opacity:0;translate:0 -6px;pointer-events:none}
+.lang-tip[hidden]{display:none}
+@keyframes tipIn{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+@media (prefers-reduced-motion:reduce){.lang-tip{animation:none;transition:none}}
 .nav .btn{padding:10px 18px;font-size:14px}
 @media (max-width:860px){.nav-links{display:none}}
 @media (max-width:480px){.nav .btn{display:none}.logo{font-size:17px}}
@@ -212,7 +223,10 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
       <a href="#demo" data-es="Prueba la recepcionista">Try the receptionist</a>
     </nav>
     <div class="nav-right">
-      <button class="lang" id="lang" type="button" aria-label="Switch language / Cambiar idioma"><span class="on" data-l="en">EN</span> / <span data-l="es">ES</span></button>
+      <div class="lang-wrap">
+        <button class="lang" id="lang" type="button" lang="es" aria-describedby="lang-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span id="lang-label">Español</span></button>
+        <div class="lang-tip" id="lang-tip" lang="es" role="note" hidden><b>¿Habla español?</b>Toque aquí para ver esta página en español.<button type="button" id="lang-tip-x" aria-label="Cerrar">×</button></div>
+      </div>
       <a class="btn dark" href="quote.html" data-es="Empezar">Get started</a>
     </div>
   </div>
@@ -402,12 +416,25 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   function setLang(l){
     document.documentElement.lang=l;
     els.forEach(function(el){el.innerHTML=el.dataset[l]});
-    [].forEach.call(document.querySelectorAll('#lang span'),function(s){s.classList.toggle('on',s.dataset.l===l)});
+    var lb=document.getElementById('lang');
+    document.getElementById('lang-label').textContent=l==='es'?'English':'Español';
+    lb.lang=l==='es'?'en':'es';
+    lb.setAttribute('aria-label',l==='es'?'View this page in English':'Ver esta página en español');
     try{localStorage.setItem('sbc-lang',l)}catch(e){}
   }
   var saved=null;try{saved=localStorage.getItem('sbc-lang')}catch(e){}
   if(saved==='es')setLang('es');
-  document.getElementById('lang').addEventListener('click',function(){setLang(document.documentElement.lang==='es'?'en':'es')});
+  setLang(document.documentElement.lang==='es'?'es':'en');
+  // "¿Habla español?" pointer for first-time visitors
+  var tip=document.getElementById('lang-tip'),tipSeen=null;
+  try{tipSeen=localStorage.getItem('sbc-lang-tip')}catch(e){}
+  function hideTip(){tip.hidden=true;try{localStorage.setItem('sbc-lang-tip','1')}catch(e){}}
+  if(!saved&&!tipSeen){
+    tip.hidden=false;
+    window.addEventListener('scroll',function(){tip.classList.toggle('away',window.scrollY>300)},{passive:true});
+  }
+  document.getElementById('lang-tip-x').addEventListener('click',hideTip);
+  document.getElementById('lang').addEventListener('click',function(){hideTip();setLang(document.documentElement.lang==='es'?'en':'es')});
 
   // cycling phone
   var b=[
