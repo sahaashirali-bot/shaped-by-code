@@ -112,6 +112,11 @@ h1 em{font-style:normal;color:var(--green)}
   .sticker{left:-6px}
   .notif{right:-4px}
 }
+@media (max-width:600px){
+  /* lift "Call answered" above the phone so it doesn't cover the business name */
+  .stage{margin-top:40px}
+  .notif{top:-30px;padding:10px 12px}
+}
 @media (prefers-reduced-motion:reduce){.notif b i{animation:none}}
 
 /* services strip */
