@@ -413,14 +413,14 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   // language toggle
   var els=[].slice.call(document.querySelectorAll('[data-es]'));
   els.forEach(function(el){el.dataset.en=el.innerHTML});
-  function setLang(l){
+  function setLang(l,keep){
     document.documentElement.lang=l;
     els.forEach(function(el){el.innerHTML=el.dataset[l]});
     var lb=document.getElementById('lang');
     document.getElementById('lang-label').textContent=l==='es'?'English':'Español';
     lb.lang=l==='es'?'en':'es';
     lb.setAttribute('aria-label',l==='es'?'View this page in English':'Ver esta página en español');
-    try{localStorage.setItem('sbc-lang',l)}catch(e){}
+    if(keep)try{localStorage.setItem('sbc-lang',l)}catch(e){}
   }
   var saved=null;try{saved=localStorage.getItem('sbc-lang')}catch(e){}
   if(saved==='es')setLang('es');
@@ -429,12 +429,12 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   var tip=document.getElementById('lang-tip'),tipSeen=null;
   try{tipSeen=localStorage.getItem('sbc-lang-tip')}catch(e){}
   function hideTip(){tip.hidden=true;try{localStorage.setItem('sbc-lang-tip','1')}catch(e){}}
-  if(!saved&&!tipSeen){
+  if(saved!=='es'&&!tipSeen){
     tip.hidden=false;
     window.addEventListener('scroll',function(){tip.classList.toggle('away',window.scrollY>300)},{passive:true});
   }
   document.getElementById('lang-tip-x').addEventListener('click',hideTip);
-  document.getElementById('lang').addEventListener('click',function(){hideTip();setLang(document.documentElement.lang==='es'?'en':'es')});
+  document.getElementById('lang').addEventListener('click',function(){hideTip();setLang(document.documentElement.lang==='es'?'en':'es',true)});
 
   // cycling phone
   var b=[
