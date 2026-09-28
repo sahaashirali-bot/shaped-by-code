@@ -106,7 +106,7 @@ h1 em{font-style:normal;color:var(--green)}
 .sticker{position:absolute;left:-18px;bottom:-22px;width:clamp(104px,12vw,140px);aspect-ratio:1;border-radius:50%;background:var(--green);color:#fff;transform:rotate(-10deg);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--display);box-shadow:0 0 0 5px #fff,0 0 0 7px var(--green)}
 .sticker b{font-size:clamp(34px,4vw,48px);line-height:1;letter-spacing:-.04em}
 .sticker small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-@media (max-width:860px){
+@media (max-width:700px){
   .hero .wrap{grid-template-columns:1fr}
   .stage{max-width:460px;width:100%;margin:10px auto 0;aspect-ratio:1/1}
   .sticker{left:-6px}
@@ -214,6 +214,17 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 .reveal{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.pre{transform:translateY(18px)}
 @media (prefers-reduced-motion:reduce){.reveal.pre{transform:none}}
+
+/* hero intro: slow push into the phone on the counter, then hand off to the live phone */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity 1s ease}
+.hero-bg img{position:absolute;max-width:none;will-change:transform,filter;filter:saturate(1.12) contrast(1.04)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.8) 30%,rgba(255,255,255,.4) 46%,rgba(255,255,255,0) 58%)}
+.hero-bg.done{opacity:0}
+.intro .stage{opacity:0;scale:.94}
+.stage{transition:opacity .9s ease,scale .9s cubic-bezier(.2,.7,.2,1)}
+@media (max-width:700px){.hero-bg{overflow:hidden;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}.hero-bg::after{background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.72) 42%,rgba(255,255,255,.22) 72%,rgba(255,255,255,.08) 100%)}.hero.intro .lede,.hero.intro .trust{text-shadow:0 0 14px rgba(255,255,255,.95),0 0 4px rgba(255,255,255,.9)}}
+@media (prefers-reduced-motion:reduce){.hero-bg{display:none}.intro .stage{opacity:1;scale:none}}
 </style>
 </head>
 <body>
@@ -238,7 +249,8 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 </header>
 
 <main id="main">
-  <section class="hero" id="top">
+  <section class="hero intro" id="top">
+    <div class="hero-bg" aria-hidden="true"><img src="hero-counter.jpg" alt="" width="1376" height="768"></div>
     <div class="wrap">
       <div>
         <p class="eyebrow" data-es="Para cualquier negocio — plomeros, cafés, salones, clínicas y más">Built for any business — plumbers, cafés, salons, clinics &amp; more</p>
@@ -469,6 +481,42 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
       if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el)}
     });
   }
+})();
+</script>
+
+<script>
+(function(){
+  var hero=document.querySelector('.hero'),bg=hero.querySelector('.hero-bg'),img=bg.querySelector('img'),stage=hero.querySelector('.stage');
+  var IW=1376,IH=768,PX=1055,PY=388,SCREEN_W=190; // phone screen centre + width in the photo
+  function finish(){hero.classList.remove('intro');bg.classList.add('done');setTimeout(function(){bg.remove()},1100)}
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
+  function place(){
+    var W=hero.clientWidth,H=hero.clientHeight,h=hero.getBoundingClientRect(),st=stage.getBoundingClientRect();
+    var tx=st.left-h.left+st.width/2,ty=st.top-h.top+st.height/2,phone=W<=700;
+    if(phone){ // stacked layout: keep the photo to the first screen and put its phone beside the text
+      H=Math.max(360,Math.min(innerHeight-Math.max(0,h.top),H));bg.style.bottom='auto';bg.style.height=H+'px';
+      tx=W*.8;ty=H*.72;
+    }
+    var s0=Math.max(W/IW,H/IH),x=tx-PX*s0,y=ty-PY*s0;
+    x=Math.min(0,Math.max(W-IW*s0,x));y=Math.min(0,Math.max(H-IH*s0,y)); // keep the photo covering the hero
+    img.style.width=IW*s0+'px';img.style.height=IH*s0+'px';img.style.left=x+'px';img.style.top=y+'px';
+    img.style.transformOrigin=(PX*s0)+'px '+(PY*s0)+'px';
+    // end zoom: photo phone screen roughly the size of the live phone, centred where the live phone sits
+    var end=phone?2.1:Math.max(2.1,(st.width*.95)/(SCREEN_W*s0));
+    return {end:end,dx:tx-(x+PX*s0),dy:ty-(y+PY*s0)};
+  }
+  function run(){
+    var p=place();
+    var a=img.animate([
+      {transform:'translate(0,0) scale(1.04)',filter:'saturate(1.12) blur(0px)'},
+      {transform:'translate('+p.dx*.6+'px,'+p.dy*.6+'px) scale('+(1+(p.end-1)*.55)+')',filter:'saturate(1.12) blur(0px)',offset:.6},
+      {transform:'translate('+p.dx+'px,'+p.dy+'px) scale('+p.end+')',filter:'saturate(1.12) blur(2px)'}
+    ],{duration:5200,easing:'cubic-bezier(.55,0,.35,1)',fill:'forwards'});
+    setTimeout(function(){hero.classList.remove('intro')},4300);
+    a.onfinish=finish;
+  }
+  if(img.complete)run();else{img.onload=run;img.onerror=finish}
+  setTimeout(function(){if(hero.classList.contains('intro'))finish()},9000); // never leave the hero half-built
 })();
 </script>
 </body>
