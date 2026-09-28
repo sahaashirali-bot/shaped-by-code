@@ -124,7 +124,6 @@ h1 em{font-style:normal;color:var(--green)}
 .strip .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
 .strip div.item{padding:22px 16px;border-right:1px solid var(--line);font-weight:700;font-size:15px;line-height:1.3}
 .strip div.item:last-child{border-right:0}
-.strip small{display:block;font-weight:500;color:var(--green);font-size:13px;margin-top:4px}
 @media (max-width:860px){.strip .wrap{grid-template-columns:repeat(2,1fr);padding-inline:0}.strip div.item{border-bottom:1px solid var(--line)}.strip div.item:nth-child(2n){border-right:0}.strip div.item:last-child{grid-column:1/-1}}
 
 /* what we do */
@@ -277,11 +276,11 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 
   <section class="strip" aria-label="Services">
     <div class="wrap">
-      <div class="item">Virtual receptionist<small>Recepcionista virtual</small></div>
-      <div class="item">Email assistant<small>Asistente de correo</small></div>
-      <div class="item">Website maintenance<small>Mantenimiento del sitio</small></div>
-      <div class="item">Get found on Google<small>Aparece en Google</small></div>
-      <div class="item">Ongoing support<small>Soporte continuo</small></div>
+      <div class="item" data-es="Recepcionista virtual">Virtual receptionist</div>
+      <div class="item" data-es="Asistente de correo">Email assistant</div>
+      <div class="item" data-es="Mantenimiento del sitio">Website maintenance</div>
+      <div class="item" data-es="Aparece en Google">Get found on Google</div>
+      <div class="item" data-es="Soporte continuo">Ongoing support</div>
     </div>
   </section>
 
