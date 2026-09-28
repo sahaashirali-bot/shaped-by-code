@@ -515,8 +515,12 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
     setTimeout(function(){hero.classList.remove('intro')},4300);
     a.onfinish=finish;
   }
-  if(img.complete)run();else{img.onload=run;img.onerror=finish}
-  setTimeout(function(){if(hero.classList.contains('intro'))finish()},9000); // never leave the hero half-built
+  function start(){ // wait until the page is actually on screen (background tabs freeze animations)
+    if(document.hidden){document.addEventListener('visibilitychange',start,{once:true});return}
+    run();
+    setTimeout(function(){if(document.contains(bg))finish()},9000); // never leave the hero half-built
+  }
+  if(img.complete)start();else{img.onload=start;img.onerror=finish}
 })();
 </script>
 </body>
