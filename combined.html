@@ -30,6 +30,9 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img{max-width:100%;display:block}
@@ -126,6 +129,13 @@ h1 em{font-style:normal;color:var(--green)}
 .strip div.item:last-child{border-right:0}
 .strip small{display:block;font-weight:500;color:var(--green-dk);font-size:13.5px;margin-top:4px}
 @media (max-width:860px){.strip .wrap{grid-template-columns:repeat(2,1fr);padding-inline:0}.strip div.item{border-bottom:1px solid var(--line)}.strip div.item:nth-child(2n){border-right:0}.strip div.item:last-child{grid-column:1/-1}}
+/* hero → services: the white hero melts into mint, then into the grey services band */
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(rgba(232,246,238,0),var(--mint));z-index:-1;pointer-events:none}
+.strip{background:var(--mint);border-block-color:transparent;position:relative;z-index:1}
+.strip div.item{border-color:rgba(15,122,67,.14)}
+.strip div.item.reveal{transition-duration:.8s}
+.strip div.item:nth-child(2){transition-delay:.06s}.strip div.item:nth-child(3){transition-delay:.12s}.strip div.item:nth-child(4){transition-delay:.18s}.strip div.item:nth-child(5){transition-delay:.24s}
+.services{background:linear-gradient(var(--mint),var(--soft) 240px)}
 
 /* what we do */
 .services{background:var(--soft)}
@@ -216,8 +226,8 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 @media (prefers-reduced-motion:reduce){.reveal.pre{transform:none}}
 
 /* hero intro: slow push into the phone on the counter, then hand off to the live phone */
-.hero{position:relative;overflow:hidden;isolation:isolate}
-.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity 1s ease}
+.hero{position:relative;overflow-x:clip;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;transition:opacity 1s ease}
 .hero-bg img{position:absolute;max-width:none;will-change:transform,filter;filter:saturate(1.12) contrast(1.04)}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.8) 30%,rgba(255,255,255,.4) 46%,rgba(255,255,255,0) 58%)}
 .hero-bg.done{opacity:0}
@@ -277,11 +287,11 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 
   <section class="strip" aria-label="Services">
     <div class="wrap">
-      <div class="item"><span data-es="Recepcionista virtual">Virtual receptionist</span><small data-es="Contesta cuando tú no puedes">Answers when you can’t</small></div>
-      <div class="item"><span data-es="Asistente de correo">Email assistant</span><small data-es="Tu bandeja de entrada, al día">Keeps your inbox handled</small></div>
-      <div class="item"><span data-es="Mantenimiento del sitio">Website maintenance</span><small data-es="Nosotros hacemos los cambios">We make the updates for you</small></div>
-      <div class="item"><span data-es="Aparece en Google">Get found on Google</span><small data-es="Te encuentran cuando te buscan">Show up when people search</small></div>
-      <div class="item"><span data-es="Soporte continuo">Ongoing support</span><small data-es="Una persona real a quien llamar">A real person to call</small></div>
+      <div class="item reveal"><span data-es="Recepcionista virtual">Virtual receptionist</span><small data-es="Contesta cuando tú no puedes">Answers when you can’t</small></div>
+      <div class="item reveal"><span data-es="Asistente de correo">Email assistant</span><small data-es="Tu bandeja de entrada, al día">Keeps your inbox handled</small></div>
+      <div class="item reveal"><span data-es="Mantenimiento del sitio">Website maintenance</span><small data-es="Nosotros hacemos los cambios">We make the updates for you</small></div>
+      <div class="item reveal"><span data-es="Aparece en Google">Get found on Google</span><small data-es="Te encuentran cuando te buscan">Show up when people search</small></div>
+      <div class="item reveal"><span data-es="Soporte continuo">Ongoing support</span><small data-es="Una persona real a quien llamar">A real person to call</small></div>
     </div>
   </section>
 
@@ -421,6 +431,7 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
   document.getElementById('year').textContent=new Date().getFullYear();
@@ -472,6 +483,39 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
       screen.classList.add('fade');
       setTimeout(function(){i=(i+1)%b.length;show(i);screen.classList.remove('fade')},380);
     },2800);
+  }
+
+  // smooth scrolling on computers; phones and tablets keep their own native scrolling
+  if(!reduce&&window.Lenis&&matchMedia('(pointer:fine)').matches){
+    var lenis=new Lenis({lerp:.1});
+    requestAnimationFrame(function raf(t){lenis.raf(t);requestAnimationFrame(raf)});
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href^="#"]');
+      if(!a||a.classList.contains('skip'))return;
+      var id=a.getAttribute('href'),el=id.length>1&&document.querySelector(id);
+      if(!el)return;
+      e.preventDefault();lenis.scrollTo(el,{offset:-80});history.replaceState(null,'',id);
+    });
+  }
+
+  // hero exit, scroll-linked: the copy drifts up and fades while the phone panel lags,
+  // grows a touch and slides under the mint band; the call card and sticker move at their own speeds
+  if(!reduce){
+    (function(){
+      var hero=document.querySelector('.hero'),copy=hero.querySelector('.wrap>div'),panel=hero.querySelector('.stage'),
+          card=hero.querySelector('.notif'),tag=hero.querySelector('.sticker'),queued=false;
+      function paint(){
+        queued=false;
+        var p=Math.min(1,Math.max(0,scrollY/hero.offsetHeight));
+        copy.style.transform='translate3d(0,'+(-p*70).toFixed(1)+'px,0)';
+        copy.style.opacity=(1-p*.85).toFixed(3);
+        panel.style.transform='translate3d(0,'+(p*90).toFixed(1)+'px,0) scale('+(1+p*.06).toFixed(4)+')';
+        card.style.transform='translate3d(0,'+(-p*60).toFixed(1)+'px,0)';
+        tag.style.transform='translate3d(0,'+(p*30).toFixed(1)+'px,0) rotate('+(-10+p*24).toFixed(1)+'deg)';
+      }
+      addEventListener('scroll',function(){if(!queued){queued=true;requestAnimationFrame(paint)}},{passive:true});
+      paint();
+    })();
   }
 
   // gentle reveal (content is visible by default; only nudges position)
