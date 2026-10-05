@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FFFFFF">
 <title>Get a Free Quote — Shaped by Code</title>
-<meta name="description" content="Tell us about your business and get a free quote for a $99 website, a virtual receptionist, or both. No pressure, no commitment. Hablamos español.">
+<meta name="description" content="Tell us about your business and get a free quote for marketing, a $99 website, or a virtual receptionist. No pressure, no commitment. Hablamos español.">
 <link rel="canonical" href="https://shapedbycode.com/quote.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316A05B'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='30' text-anchor='middle' fill='white'%3Esc%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,6 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 legend{font-size:14px;font-weight:700;margin-bottom:10px;padding:0}
 .options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .option{position:relative;margin:0;padding:16px 16px 16px 48px;border:1.5px solid var(--field);border-radius:16px;cursor:pointer;font-weight:400;transition:border-color .2s ease,background .2s ease}
-.option:last-child{grid-column:1/-1}
 .option input{position:absolute;opacity:0;width:1px;height:1px}
 .option::before{content:"";position:absolute;left:16px;top:18px;width:20px;height:20px;border-radius:50%;border:2px solid #b9c2bd;background:#fff;transition:all .2s ease}
 .option strong{display:block;font-size:16px;line-height:1.3}
@@ -123,9 +122,10 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   <div class="wrap">
     <div class="intro">
       <p class="eyebrow" data-es="Cotización gratis · Sin presión">Free quote · No pressure</p>
-      <h1 data-es="Pongamos tu negocio <em>en línea.</em>">Let’s get your business <em>online.</em></h1>
+      <h1 data-es="Hagamos crecer <em>tu negocio.</em>">Let’s grow <em>your business.</em></h1>
       <p class="lede" data-es="Cuéntanos un poco sobre tu negocio. Te llamamos para hablar de tu plan y darte un precio claro, sin compromiso.">Tell us a little about your business. We’ll call you to talk through your plan and give you a clear price, with no commitment.</p>
       <ul class="checks">
+        <li data-es="Anuncios en Facebook, Instagram y Google">Facebook, Instagram &amp; Google ads</li>
         <li data-es="Sitios web desde $99">Websites from $99</li>
         <li data-es="Cotización gratis, sin compromiso">Free quote, no commitment</li>
         <li data-es="Siempre a tu lado, antes y después">We stay by your side, before and after launch</li>
@@ -150,7 +150,8 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
           <div class="options">
             <label class="option" for="service-website"><input type="radio" id="service-website" name="service" value="website" required><strong data-es="Sitio web">Website</strong><small data-es="Un sitio que te trae clientes · <span class=&quot;price&quot;>desde $99</span>">A site that brings in customers · <span class="price">from $99</span></small></label>
             <label class="option" for="service-automation"><input type="radio" id="service-automation" name="service" value="automation" required><strong data-es="Recepcionista virtual">Virtual receptionist</strong><small data-es="Contesta tus llamadas cuando estás ocupado">Answers your calls when you’re busy</small></label>
-            <label class="option" for="service-both"><input type="radio" id="service-both" name="service" value="both" required><strong data-es="Los dos">Both</strong><small data-es="Sitio web y recepcionista, con soporte continuo">Website and receptionist, with ongoing support</small></label>
+            <label class="option" for="service-marketing"><input type="radio" id="service-marketing" name="service" value="marketing" required><strong data-es="Marketing y anuncios">Marketing &amp; ads</strong><small data-es="Facebook, Instagram y Google que te traen clientes">Facebook, Instagram and Google ads that bring customers</small></label>
+            <label class="option" for="service-both"><input type="radio" id="service-both" name="service" value="both" required><strong data-es="Más de uno">More than one</strong><small data-es="Una combinación, con soporte continuo">A mix of these, with ongoing support</small></label>
           </div>
         </fieldset>
         <button class="btn dark wide" type="submit" data-es="Pedir mi cotización gratis ↗">Get my free quote ↗</button>
@@ -165,7 +166,7 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   <div class="wrap">
     <div class="col">
       <a class="logo" href="/"><span class="badge" aria-hidden="true">sc</span>shaped <span class="by">by</span> code</a>
-      <span style="margin-top:8px" data-es="Sitios web y recepción virtual para negocios locales.">Websites &amp; virtual reception for local businesses.</span>
+      <span style="margin-top:8px" data-es="Marketing, sitios web y recepción virtual para negocios locales.">Marketing, websites &amp; virtual reception for local businesses.</span>
     </div>
     <div class="col">
       <h4 data-es="Contacto">Contact</h4>
@@ -209,13 +210,13 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   var endpoint=form.dataset.formspreeEndpoint.trim();
   var ready=/^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/.test(endpoint);
   var requested=new URLSearchParams(location.search).get('service');
-  if(['website','automation','both'].indexOf(requested)>-1)form.elements.service.value=requested;
+  if(['website','automation','marketing','both'].indexOf(requested)>-1)form.elements.service.value=requested;
   function say(msg,err){status.textContent=msg;status.classList.toggle('err',!!err)}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(!form.checkValidity()){
       var bad=form.querySelector(':invalid');
-      say(bad&&bad.name==='service'?t('Please choose what you need: website, receptionist, or both.','Elige lo que necesitas: sitio web, recepcionista o los dos.'):bad&&bad.type==='email'?t('Please check your email address.','Revisa tu correo electrónico.'):t('Please fill in every field so we can reach you.','Llena todos los campos para poder contactarte.'),true);
+      say(bad&&bad.name==='service'?t('Please choose what you need: website, receptionist, marketing, or more than one.','Elige lo que necesitas: sitio web, recepcionista, marketing o más de uno.'):bad&&bad.type==='email'?t('Please check your email address.','Revisa tu correo electrónico.'):t('Please fill in every field so we can reach you.','Llena todos los campos para poder contactarte.'),true);
       if(bad)bad.focus();
       return;
     }
