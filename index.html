@@ -242,6 +242,48 @@ a.svc:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .mband .btn.ghost:hover{background:rgba(255,255,255,.1)}
 @media (max-width:900px){.mtop{grid-template-columns:1fr}.plat{grid-template-columns:1fr}.mflow{grid-template-columns:1fr 1fr}.mflow div:nth-child(2){border-right:0}.mflow div:nth-child(-n+2){border-bottom:1px solid #2a2a2a}}
 @media (max-width:520px){.mflow{grid-template-columns:1fr}.mflow div{border-right:0;border-bottom:1px solid #2a2a2a}}
+/* monthly report + CRM preview */
+.rpt{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;margin-top:16px;background:#fff;color:var(--ink);border-radius:28px;padding:44px}
+.rpt-copy .eyebrow{background:var(--mint);color:var(--green-dk)}
+.rpt-copy h3{font-family:var(--display);font-weight:800;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.035em;line-height:1;margin:14px 0 14px;text-wrap:balance}
+.rpt-copy h3 em{font-style:normal;color:var(--green-dk)}
+.rpt-copy>p{margin:0 0 20px;color:var(--ink-2);font-size:17px;max-width:46ch}
+.rpt-copy ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.rpt-copy li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.4}
+.rpt-copy li b{display:block;font-size:16px}
+.rpt-copy li span{color:var(--muted)}
+.rpt-copy li i{flex:none;width:28px;height:28px;border-radius:9px;background:var(--mint);display:flex;align-items:center;justify-content:center}
+.rpt-copy li i svg{width:16px;height:16px}
+.dash{background:var(--soft);border:1px solid var(--line);border-radius:22px;padding:20px;font-size:14px}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dash-top b{font-family:var(--display);font-size:18px;letter-spacing:-.02em}
+.dash-top small{font-size:12px;font-weight:700;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px 10px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.kpi span{display:block;font-size:12.5px;color:var(--muted);font-weight:600}
+.kpi b{display:block;font-family:var(--display);font-size:26px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi em{font-style:normal;font-size:12px;font-weight:700;color:var(--green-dk)}
+.chart{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px 6px;margin-top:10px}
+.chart-h{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--muted)}
+.chart svg{display:block;width:100%;height:auto;margin-top:6px}
+.chart .ln{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:600;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.7,.2,1)}
+.chart .ar{fill:url(#rptfill);transition:opacity 1s .8s}
+.rpt.pre-draw .chart .ln{stroke-dashoffset:600}
+.rpt.pre-draw .chart .ar{opacity:0}
+.chart text{font:600 10px var(--body);fill:#9A9A9A}
+.crm{background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:10px;overflow:hidden}
+.crm-h{display:flex;justify-content:space-between;padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--muted);border-bottom:1px solid var(--line)}
+.crm-r{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--line)}
+.crm-r:last-child{border-bottom:0}
+.crm-r .av{width:32px;height:32px;border-radius:50%;background:var(--mint);color:var(--green-dk);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.crm-r b{display:block;font-size:14px}
+.crm-r small{font-size:12px;color:var(--muted)}
+.st{font-size:11.5px;font-weight:800;border-radius:99px;padding:4px 10px;white-space:nowrap}
+.st.bk{background:#DFF3E7;color:#0B6B39}.st.cb{background:#E9EEF9;color:#284B9C}.st.nw{background:#FFF1D6;color:#8A5A00}.st.qt{background:#F1ECFA;color:#5B3A9A}
+.dash-note{margin:10px 2px 0;font-size:12px;color:var(--muted)}
+@media (max-width:900px){.rpt{grid-template-columns:1fr;padding:28px 20px;gap:28px}}
+@media (max-width:420px){.kpis{grid-template-columns:1fr 1fr}.kpis .kpi:last-child{grid-column:span 2}}
+@media (prefers-reduced-motion:reduce){.chart .ln,.chart .ar{transition:none}}
 
 /* receptionist demo */
 .demo .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:center}
@@ -466,6 +508,45 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
         <div class="reveal"><i>02</i><b data-es="Creamos">Create</b><span data-es="Hacemos los anuncios: fotos, video y texto, en inglés y español.">We make the ads: photos, video and copy, in English and Spanish.</span></div>
         <div class="reveal"><i>03</i><b data-es="Lanzamos">Launch</b><span data-es="Publicamos y ajustamos cada semana para que rindan más.">We launch and tune them every week so your money works harder.</span></div>
         <div class="reveal"><i>04</i><b data-es="Reportamos">Report</b><span data-es="Cada mes te decimos, en palabras simples, qué funcionó.">Every month we tell you, in plain words, what worked.</span></div>
+      </div>
+      <div class="rpt" id="report">
+        <div class="rpt-copy">
+          <p class="eyebrow" data-es="Tu reporte mensual">Your monthly report</p>
+          <h3 data-es="Mira exactamente lo que <em>hacen tus anuncios.</em>">See exactly what <em>your ads are doing.</em></h3>
+          <p data-es="Nada de adivinar. Cada mes recibes un reporte sencillo y acceso a tu panel: cuánta gente te vio, quién hizo clic, quién llamó, y cada cliente nuevo en una sola lista para que no se te escape ninguno.">No guessing. Every month you get a simple report and access to your dashboard: how many people saw you, who clicked, who called, and every new lead in one list, so nobody slips through the cracks.</p>
+          <ul>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#0F7A43" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b data-es="Cada cliente en un solo lugar">Every lead in one place</b><span data-es="Tu CRM muestra quién te contactó y de dónde vino.">Your CRM shows who reached out and where they came from.</span></div></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#0F7A43" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b data-es="Llamadas, formularios y mensajes">Calls, forms and messages</b><span data-es="Todo queda registrado, para que no pierdas ninguno.">All tracked, so you never miss a follow-up.</span></div></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#0F7A43" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b data-es="Qué cambiamos y por qué">What we changed and why</b><span data-es="En palabras simples, sin jerga de marketing.">In plain words, no marketing jargon.</span></div></li>
+          </ul>
+        </div>
+        <div class="dash" aria-label="Example monthly marketing report">
+          <div class="dash-top"><b data-es="Reporte de octubre">October report</b><small data-es="Ejemplo">Example</small></div>
+          <div class="kpis">
+            <div class="kpi"><span data-es="Gente alcanzada">People reached</span><b>18,420</b><em>▲ 22%</em></div>
+            <div class="kpi"><span data-es="Clics">Clicks</span><b>1,136</b><em>▲ 15%</em></div>
+            <div class="kpi"><span data-es="Llamadas y clientes">Calls &amp; leads</span><b>64</b><em>▲ 31%</em></div>
+          </div>
+          <div class="chart">
+            <div class="chart-h"><span data-es="Clientes nuevos por semana">New leads per week</span><span data-es="Últimas 8 semanas">Last 8 weeks</span></div>
+            <svg viewBox="0 0 400 130" role="img" aria-label="Line chart: new leads per week rising from 6 to 19 over 8 weeks">
+              <defs><linearGradient id="rptfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16A05B" stop-opacity=".22"/><stop offset="1" stop-color="#16A05B" stop-opacity="0"/></linearGradient></defs>
+              <g stroke="#EFEFEF" stroke-width="1"><line x1="10" y1="20" x2="390" y2="20"/><line x1="10" y1="60" x2="390" y2="60"/><line x1="10" y1="100" x2="390" y2="100"/></g>
+              <path class="ar" d="M10 100 L64 92 L118 96 L172 78 L226 70 L280 56 L334 40 L390 30 L390 110 L10 110 Z"/>
+              <path class="ln" d="M10 100 L64 92 L118 96 L172 78 L226 70 L280 56 L334 40 L390 30"/>
+              <circle cx="390" cy="30" r="5" fill="#16A05B" stroke="#fff" stroke-width="2"/>
+              <text x="10" y="125">W1</text><text x="172" y="125">W4</text><text x="372" y="125">W8</text>
+            </svg>
+          </div>
+          <div class="crm">
+            <div class="crm-h"><span data-es="Clientes nuevos (CRM)">New leads (CRM)</span><span data-es="Fuente · Estado">Source · Status</span></div>
+            <div class="crm-r"><span class="av">MG</span><div><b>Maria G.</b><small data-es="Anuncio de Facebook">Facebook ad</small></div><span class="st bk" data-es="Agendado">Booked</span></div>
+            <div class="crm-r"><span class="av">JT</span><div><b>James T.</b><small data-es="Búsqueda en Google">Google search</small></div><span class="st cb" data-es="Le llamamos">Called back</span></div>
+            <div class="crm-r"><span class="av">AR</span><div><b>Ana R.</b><small>Google Maps</small></div><span class="st nw" data-es="Nuevo">New</span></div>
+            <div class="crm-r"><span class="av">KL</span><div><b>Kevin L.</b><small data-es="Anuncio de Instagram">Instagram ad</small></div><span class="st qt" data-es="Cotización enviada">Quote sent</span></div>
+          </div>
+          <p class="dash-note" data-es="Números de ejemplo. Tu reporte muestra tus resultados reales.">Example numbers. Your report shows your real results.</p>
+        </div>
       </div>
       <div class="ctas">
         <a class="btn dark" href="quote.html?service=marketing" data-es="Quiero un plan de marketing ↗">Get my marketing plan ↗</a>
@@ -701,6 +782,10 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   }
   if(img.complete)start();else{img.onload=start;img.onerror=finish}
 })();
+</script>
+<script>
+(function(){var r=document.getElementById('report');if(!r||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+r.classList.add('pre-draw');new IntersectionObserver(function(e,o){if(e[0].isIntersecting){r.classList.remove('pre-draw');o.disconnect()}},{threshold:.35}).observe(r)})();
 </script>
 </body>
 </html>
