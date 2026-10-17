@@ -350,8 +350,11 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
 .intro .stage{opacity:0;scale:.94}
 .stage{transition:opacity .9s ease,scale .9s cubic-bezier(.2,.7,.2,1)}
 @media (max-width:700px){.hero-bg{overflow:hidden;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}.hero-bg::after{background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.72) 42%,rgba(255,255,255,.22) 72%,rgba(255,255,255,.08) 100%)}.hero.intro .lede,.hero.intro .trust{text-shadow:0 0 14px rgba(255,255,255,.95),0 0 4px rgba(255,255,255,.9)}}
+/* phones: the live phone sits below the text, so show it right away instead of after the intro */
+@media (max-width:700px){.intro .stage{opacity:1;scale:none}}
 @media (prefers-reduced-motion:reduce){.hero-bg{display:none}.intro .stage{opacity:1;scale:none}}
 </style>
+<link rel="preload" as="image" href="phone-condor.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip" href="#main" data-es="Saltar al contenido">Skip to content</a>
@@ -392,7 +395,7 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
       </div>
       <div class="stage" aria-label="Example business websites on a phone">
         <div class="phone">
-          <div class="screen" id="demo-screen" aria-hidden="true"><img src="phone-condor.webp" alt="" class="on" width="420" height="794"><img src="phone-plumbing.webp" alt="" loading="lazy" width="420" height="794"><img src="phone-barbershop.webp" alt="" loading="lazy" width="420" height="794"><img src="phone-coffee.webp" alt="" loading="lazy" width="420" height="794"></div>
+          <div class="screen" id="demo-screen" aria-hidden="true"><img src="phone-condor.webp" alt="" class="on" fetchpriority="high" width="420" height="794"><img src="phone-plumbing.webp" alt="" decoding="async" width="420" height="794"><img src="phone-barbershop.webp" alt="" decoding="async" width="420" height="794"><img src="phone-coffee.webp" alt="" decoding="async" width="420" height="794"></div>
         </div>
         <div class="notif"><b><i></i><span data-es="Llamada contestada">Call answered</span></b><span data-es="Nuevo cliente agendado · resumen enviado">New customer booked · summary sent</span></div>
       </div>
