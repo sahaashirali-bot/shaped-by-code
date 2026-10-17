@@ -104,15 +104,9 @@ h1 em{font-style:normal;color:var(--green)}
 .trust b{color:var(--ink)}
 .stage{position:relative;border-radius:30px;background:var(--mint);aspect-ratio:1/1.02;display:flex;align-items:center;justify-content:center;max-width:100%}
 .phone{width:min(54%,230px);aspect-ratio:9/16.4;border-radius:36px;background:var(--ink);padding:9px;box-shadow:0 30px 50px -22px rgba(0,0,0,.45);transform:rotate(4deg)}
-.screen{width:100%;height:100%;border-radius:28px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
-.screen>*{transition:opacity .35s ease}
-.screen.fade>*{opacity:0}
-.s-hero{flex:0 0 42%;color:#fff;padding:18px 16px 14px;display:flex;flex-direction:column;justify-content:flex-end;transition:background .5s ease,opacity .35s ease}
-.s-hero small{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-.s-hero b{font-family:var(--display);font-size:clamp(18px,2.1vw,24px);line-height:1;letter-spacing:-.02em;margin-top:4px}
-.s-body{padding:12px 14px;font-size:10.5px;color:#444;line-height:1.45}
-.s-btn{display:block;margin:9px 0 6px;background:var(--ink);color:#fff;border-radius:20px;text-align:center;padding:8px;font-weight:700;font-size:10.5px}
-.s-row{display:flex;justify-content:space-between;border-top:1px solid #EEE;padding:7px 0;font-size:10.5px}
+.screen{position:relative;width:100%;height:100%;border-radius:28px;background:#fff;overflow:hidden}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .7s ease}
+.screen img.on{opacity:1}
 .notif{position:absolute;right:-12px;top:10%;background:#fff;border-radius:16px;padding:12px 14px;width:min(62%,230px);box-shadow:0 16px 34px -16px rgba(0,0,0,.35);font-size:13px;line-height:1.4;color:var(--ink-2)}
 .notif b{display:flex;align-items:center;gap:7px;color:var(--ink);font-size:14px;margin-bottom:2px}
 .notif b i{width:9px;height:9px;border-radius:50%;background:var(--green);display:block;animation:pulse 2s ease-out infinite}
@@ -396,12 +390,9 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
         <a class="ex-link" href="https://starks-hot-chicken.com/" target="_blank" rel="noopener"><span class="ex-tag"><i></i><span data-es="EN VIVO">LIVE</span></span><span data-es="Mira un ejemplo de sitio que hacemos">See an example site we build</span><span class="ex-arrow" aria-hidden="true">→</span></a>
         <div class="trust"><span data-es="<b>Siempre a tu lado</b>, antes y después"><b>We stay by your side</b>, before and after launch</span><span data-es="<b>Diseño original</b>, nunca plantillas"><b>Original design</b>, never a template</span><span><b>Hablamos español</b></span></div>
       </div>
-      <div class="stage" aria-label="Example websites we build, shown on a phone">
+      <div class="stage" aria-label="Example business websites on a phone">
         <div class="phone">
-          <div class="screen" id="demo-screen" aria-live="off">
-            <div class="s-hero" id="d-hero"><small id="d-type">Plumbing · Houston, TX</small><b id="d-name">Rivera Plumbing Co.</b></div>
-            <div class="s-body"><span id="d-tag">24/7 emergency repairs. Licensed &amp; insured.</span><span class="s-btn" id="d-btn">Request a plumber</span><div class="s-row"><span id="d-s1">Drain cleaning</span><b id="d-p1">$89</b></div><div class="s-row"><span id="d-s2">Water heater install</span><b id="d-p2">$450</b></div><div class="s-row"><span id="d-s3">Leak repair</span><b id="d-p3">$120</b></div></div>
-          </div>
+          <div class="screen" id="demo-screen" aria-hidden="true"><img src="phone-condor.webp" alt="" class="on" width="420" height="794"><img src="phone-plumbing.webp" alt="" loading="lazy" width="420" height="794"><img src="phone-barbershop.webp" alt="" loading="lazy" width="420" height="794"><img src="phone-coffee.webp" alt="" loading="lazy" width="420" height="794"></div>
         </div>
         <div class="notif"><b><i></i><span data-es="Llamada contestada">Call answered</span></b><span data-es="Nuevo cliente agendado · resumen enviado">New customer booked · summary sent</span></div>
       </div>
@@ -680,25 +671,14 @@ footer small{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;
   document.getElementById('lang-tip-x').addEventListener('click',hideTip);
   document.getElementById('lang').addEventListener('click',function(){hideTip();setLang(document.documentElement.lang==='es'?'en':'es',true)});
 
-  // cycling phone
-  var b=[
-    ["Plumbing · Houston, TX","Rivera Plumbing Co.","24/7 emergency repairs. Licensed &amp; insured.","Request a plumber","Drain cleaning","$89","Water heater install","$450","Leak repair","$120","#1F3A5F,#2F6690"],
-    ["Café · Pearland, TX","Morning Ritual Café","Fresh coffee, pastries &amp; breakfast all day.","Order ahead","Latte","$5","Breakfast tacos","$4","Pastry box","$18","#4A2C1D,#8A5A3B"],
-    ["Hair salon · Sugar Land, TX","Luna Hair Studio","Color, cuts &amp; styling by appointment.","Book an appointment","Women’s cut","$55","Full color","$120","Blowout","$40","#5C2A4A,#A34E7F"],
-    ["Dental · Katy, TX","Bright Smile Dental","New patients welcome. Most insurance accepted.","Book a cleaning","Cleaning &amp; exam","$89","Whitening","$250","Emergency visit","$75","#1D5652,#2E8C84"],
-    ["Landscaping · Friendswood, TX","GreenLine Lawn Care","Weekly mowing, trimming &amp; seasonal cleanup.","Get a free quote","Weekly mowing","$45","Hedge trimming","$60","Yard cleanup","$150","#23512D,#3F8A4E"]
-  ];
-  var ids=['d-type','d-name','d-tag','d-btn','d-s1','d-p1','d-s2','d-p2','d-s3','d-p3'];
-  var screen=document.getElementById('demo-screen'),i=0;
-  function show(k){var d=b[k];ids.forEach(function(id,n){document.getElementById(id).innerHTML=d[n]});document.getElementById('d-hero').style.background='linear-gradient(160deg,'+d[10]+')'}
-  show(0);
+  // cycling phone: real-looking sites cross-fade inside the screen
+  var shots=document.querySelectorAll('#demo-screen img'),i=0;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce){
     setInterval(function(){
       if(document.hidden)return;
-      screen.classList.add('fade');
-      setTimeout(function(){i=(i+1)%b.length;show(i);screen.classList.remove('fade')},380);
-    },2800);
+      shots[i].classList.remove('on');i=(i+1)%shots.length;shots[i].classList.add('on');
+    },3200);
   }
 
   // smooth scrolling on computers; phones and tablets keep their own native scrolling
